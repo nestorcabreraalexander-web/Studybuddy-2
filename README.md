@@ -1,1 +1,1 @@
-index.html
+yourusername.github.io/studybuddy/index.html
