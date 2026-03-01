@@ -989,14 +989,21 @@ function showPage(id, btn){
   // Legal pages don't have nav buttons — handle gracefully
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
+  const target = document.getElementById('page-'+id);
+  if(!target) return;
+  target.classList.add('active');
   if(btn) btn.classList.add('active');
+  window.scrollTo(0,0);
   if(id==='progress') renderProgress();
   if(id==='dashboard') renderDashboard();
   if(id==='teacher') renderTeacher();
   if(id==='videos') renderVideos('All');
 }
-function goHelper(s){ selSubj(s, null); showPage('helper', document.querySelectorAll('nav button')[1]); }
+function goHelper(s){
+  // Navigate to helper page and select the subject
+  showPage('helper', document.querySelectorAll('nav button')[1]);
+  setTimeout(()=>{ selSubj(s, null); }, 50);
+}
 
 // ══════════ GRADE ══════════
 function loadGrade(){ const g=localStorage.getItem('sb_grade'); if(g) document.getElementById('grade-sel').value=g; }
